@@ -22,6 +22,7 @@ coverage/
 .cache/
 
 # Editor and operating-system files
+.codex-remote-attachments/
 .vscode/
 .idea/
 *.swp
