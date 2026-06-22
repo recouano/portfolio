@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
+import { flushSync } from "react-dom"
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -63,34 +64,92 @@ const certifications = [
     icon: Cloud,
     name: "AWS Certified Cloud Practitioner",
     date: "Jul 2024",
-    detail: "Validated cloud fluency and foundational knowledge of core AWS services.",
+    detail: "Validates a foundational, high-level understanding of the AWS Cloud, its services, and core terminology.",
+    href: "https://www.credly.com/badges/25ea2d78-c05c-498c-9f77-9ea7b674fd1a",
   },
   {
     icon: Award,
-    name: "AWS re/Start",
+    name: "AWS re/Start Graduate",
     date: "Jan — Apr 2024",
     detail: "12-week hands-on cloud cohort covering EC2, S3, RDS, Lambda, IAM, Python, databases, networking, and Linux.",
+    href: "https://www.credly.com/badges/ca68ffe4-cc98-4722-a550-f6fa8ac6f189",
   },
 ]
 
 function ThemeToggle() {
   const [dark, setDark] = useState(() => document.documentElement.classList.contains("dark"))
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark)
-    localStorage.theme = dark ? "dark" : "light"
-  }, [dark])
+  const toggleTheme = (event) => {
+    const root = document.documentElement
+    const nextDark = !dark
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    const applyTheme = () => {
+      root.classList.toggle("dark", nextDark)
+      localStorage.theme = nextDark ? "dark" : "light"
+      flushSync(() => setDark(nextDark))
+    }
+
+    if (prefersReducedMotion) {
+      applyTheme()
+      return
+    }
+
+    if (!document.startViewTransition) {
+      root.classList.add("theme-transitioning")
+      applyTheme()
+      window.setTimeout(() => root.classList.remove("theme-transitioning"), 350)
+      return
+    }
+
+    const { left, top, width, height } = event.currentTarget.getBoundingClientRect()
+    const x = left + width / 2
+    const y = top + height / 2
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    )
+    const transition = document.startViewTransition(applyTheme)
+
+    transition.ready
+      .then(() => {
+        root.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${radius}px at ${x}px ${y}px)`,
+            ],
+          },
+          {
+            duration: 550,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            pseudoElement: "::view-transition-new(root)",
+          },
+        )
+      })
+      .catch(() => {
+        // The theme is already applied if a view transition is interrupted.
+      })
+  }
 
   return (
-    <Button variant="ghost" size="icon" onClick={() => setDark(!dark)} aria-label="Toggle color theme">
-      {dark ? <Sun size={18} /> : <Moon size={18} />}
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={toggleTheme}
+      aria-label={`Switch to ${dark ? "light" : "dark"} mode`}
+      title={`Switch to ${dark ? "light" : "dark"} mode`}
+    >
+      <span className="theme-toggle-icon" key={dark ? "sun" : "moon"}>
+        {dark ? <Sun size={18} /> : <Moon size={18} />}
+      </span>
     </Button>
   )
 }
 
-function SectionLabel({ children, number }) {
+function SectionLabel({ children, number, className = "" }) {
   return (
-    <div className="mb-8 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+    <div className={`mb-8 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground ${className}`}>
       <span className="text-primary">{number}</span>
       <span>{children}</span>
       <span className="h-px flex-1 bg-border" />
@@ -139,7 +198,8 @@ export default function App() {
                 <div className="flex items-center gap-2"><Code2 size={14} /> Software Engineer</div>
               </div>
               <p className="max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-                I build <span className="text-foreground">cloud-native products</span>, intelligent automations, and resilient systems across healthcare and business environments.
+                <span className="font-medium text-foreground">Two years of software development experience.</span>{" "}
+                I build cloud-native products, intelligent automations, and resilient systems across healthcare and business environments.
               </p>
             </div>
             <div className="mt-10 flex animate-fade-up flex-wrap gap-3 [animation-delay:240ms]">
@@ -225,7 +285,7 @@ export default function App() {
         </section>
 
         <section id="experience" className="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
-          <SectionLabel number="01">Selected experience</SectionLabel>
+          <SectionLabel number="01">Experience</SectionLabel>
           <div className="space-y-5">
             {experiences.map((job, index) => (
               <Card key={job.company} className="group p-6 transition-all hover:-translate-y-1 hover:shadow-xl md:p-9">
@@ -287,29 +347,38 @@ export default function App() {
           </div>
         </section>
 
-        <section id="credentials" className="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
-          <SectionLabel number="03">Credentials & education</SectionLabel>
+        <section id="credentials" className="mx-auto max-w-7xl px-5 py-20 lg:px-10 lg:py-24">
+          <SectionLabel number="03" className="mb-6">Credentials & education</SectionLabel>
           <div className="grid gap-5 lg:grid-cols-3">
-            {certifications.map(({ icon: Icon, name, date, detail }) => (
-              <Card className="flex min-h-64 flex-col p-6 md:p-7" key={name}>
-                <div className="flex items-start justify-between">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/15 text-primary"><Icon size={21} /></div>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{date}</span>
+            {certifications.map(({ icon: Icon, name, date, detail, href }) => (
+              <Card className="flex flex-col p-5 md:p-6" key={name}>
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                    <Icon size={19} />
+                  </div>
+                  <span className="text-right font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{date}</span>
                 </div>
-                <div className="mt-auto pt-10">
-                  <h3 className="font-display text-xl font-bold tracking-tight">{name}</h3>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{detail}</p>
+                <div className="mt-7">
+                  <h3 className="font-display text-lg font-bold leading-snug tracking-tight md:text-xl">
+                    {href ? (
+                      <a className="inline-flex items-center gap-2 transition-colors hover:text-primary" href={href} target="_blank" rel="noreferrer">
+                        {name}
+                        <ArrowUpRight className="shrink-0" size={17} aria-hidden="true" />
+                      </a>
+                    ) : name}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{detail}</p>
                 </div>
               </Card>
             ))}
           </div>
-          <Card className="mt-5 grid gap-6 bg-primary p-6 text-black md:grid-cols-[1fr_auto] md:items-center md:p-8">
+          <Card className="mt-5 grid gap-4 bg-primary p-5 text-black md:grid-cols-[1fr_auto] md:items-center md:px-7 md:py-6">
             <div>
               <div className="font-mono text-[10px] uppercase tracking-widest opacity-60">Education / Jan 2024</div>
-              <h3 className="mt-2 font-display text-2xl font-extrabold tracking-tight">B.S. Computer Engineering</h3>
+              <h3 className="mt-1.5 font-display text-2xl font-extrabold tracking-tight">B.S. Computer Engineering</h3>
               <p className="mt-1 text-sm opacity-70">University of San Carlos · Philippines</p>
             </div>
-            <Code2 className="hidden opacity-30 md:block" size={54} />
+            <Code2 className="hidden opacity-30 md:block" size={44} />
           </Card>
         </section>
 
