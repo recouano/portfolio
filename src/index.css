@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 48 33% 97%;
+    --foreground: 222 14% 10%;
+    --card: 48 25% 99%;
+    --card-foreground: 222 14% 10%;
+    --primary: 87 100% 48%;
+    --primary-foreground: 222 14% 8%;
+    --muted: 45 18% 92%;
+    --muted-foreground: 220 7% 42%;
+    --border: 40 11% 82%;
+    --input: 40 11% 82%;
+    --ring: 87 100% 40%;
+  }
+
+  .dark {
+    --background: 222 14% 8%;
+    --foreground: 48 30% 96%;
+    --card: 222 13% 11%;
+    --card-foreground: 48 30% 96%;
+    --primary: 87 100% 48%;
+    --primary-foreground: 222 14% 8%;
+    --muted: 220 11% 14%;
+    --muted-foreground: 220 7% 65%;
+    --border: 220 9% 21%;
+    --input: 220 9% 21%;
+    --ring: 87 100% 48%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

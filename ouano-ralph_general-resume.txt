@@ -1,0 +1,74 @@
+Ralph Eduard Ouano | Software Engineer 
+Cebu, PH 
++63 906 2866 676
+r.ouano@icloud.com
+
+Summary
+Software Engineer with experience building cloud-native and full-stack applications using React, Next.js,  Python, and Rust. Experienced in AI-assisted development workflows, intelligent automation, and enterprise software delivery within healthcare and business environments. Strong background in frontend engineering, backend APIs, cloud technologies, production support, and operational automation. Proven ability to leverage modern AI tooling to accelerate software delivery while maintaining engineering quality through review, testing, and validation.
+
+Experience
+Associate Software Engineer II 
+Optum Global Solutions / UnitedHealth Group                   09/2024 - Present
+Resolved production incidents and monitored application health for customer-facing healthcare applications, restoring service reliability through Datadog and internal support tooling.
+Develop enhancements and automation workflows for internal support platforms, reducing resolution times for specific customer issues from approximately 20 minutes to near-instant execution.
+Contribute to AI-powered automation initiatives utilizing LangChain and LangGraph to explore agent-based workflows for operational support and incident investigation.
+Maintained and remediated security vulnerabilities across three production codebases spanning Rust, Python, React, and Node.js, ensuring compliance with internal security standards and reducing operational risk.
+Leverage AI-assisted development workflows to accelerate implementation, debugging, testing, and feature delivery while maintaining code quality through review and validation.
+Contribute to the migration of a React + TypeScript application to Next.js, gaining experience with modern React architecture and framework-based optimization.
+Key Technologies:React, TypeScript, Next.js, Python, Rust, Node, AWS, Datadog, ServiceNow
+Software Development Engineer 
+Lanex Philippines                   08/2023 - 11/2023
+Developed responsive web interfaces using Vue.js to support internal business applications.
+Built and maintained backend APIs and middleware using PHP and Laravel while adhering to JSON:API standards.
+Improved performance, scalability, and security of internal business systems supporting inventory management workflows.
+Collaborated with stakeholders to deliver frontend and backend functionality aligned with business requirements.
+Key Technologies:Vue.js, Laravel, PHP, JavaScript, REST APIs, MySQL
+
+Certifications and Training
+Optum.ai Generative AI Certification | 12/2025
+
+Focused on generative AI, retrieval‑augmented generation (RAG), and responsible AI in healthcare.
+Completed capstone project applying GPT‑based models to clinical intelligence and claims optimization.
+
+AWS Certified Cloud Practitioner | 07/2024
+
+Fundamental understanding of IT services and their uses in the AWS Cloud
+Demonstrated cloud fluency and foundational AWS knowledge
+
+AWS ReStart | 01/2024 - 04/2024
+
+Completed a 12-week cohort-based training program that prepares individuals for careers in the cloud.
+Hands-on experience on AWS services including but not limited to EC2, S3, RDS, Lambda, IAM
+Topics: AWS Cloud Foundations, Programming (Python), Databases (SQL and NoSQL), Security (IAM), APIs, REST, System Operations, Networking, Linux Fundamentals, Tooling and Automation
+
+Education
+University of San Carlos                   Bachelor of Science in Computer Engineering 
+01/2024
+Philippines
+
+Skills
+JavaScript
+React
+TypeScript
+Next.js
+Python
+Go
+Rust
+PHP
+Vue.js
+HTML
+Node.js
+Laravel
+AWS (EC2, S3, Lambda, IAM)
+LangChain
+LangGraph
+Retrieval-Augmented Generation (RAG)
+AI-Assisted Development
+Datadog
+REST APIs
+AI & Automation
+Monitoring & Operations
+ServiceNow
+Docker
+Git
+GitHub Actions
