@@ -190,7 +190,7 @@ export default function App() {
               <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">Available for ambitious work</span>
             </div>
             <h1 className="animate-fade-up font-display text-[clamp(4rem,11vw,9.5rem)] font-extrabold leading-[0.86] tracking-[-0.075em] [animation-delay:80ms]">
-              Ralph<br />Ouano<span className="text-primary">.</span>
+              Ralph Eduard<br />Ouano<span className="text-primary">.</span>
             </h1>
             <div className="mt-10 grid animate-fade-up gap-8 [animation-delay:160ms] md:grid-cols-[1fr_1.25fr] md:items-end">
               <div className="font-mono text-xs uppercase leading-6 tracking-wider text-muted-foreground">
@@ -198,12 +198,12 @@ export default function App() {
                 <div className="flex items-center gap-2"><Code2 size={14} /> Software Engineer</div>
               </div>
               <p className="max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-                <span className="font-medium text-foreground">Two years of software development experience.</span>{" "}
+                <span className="font-medium text-foreground">Over 3 years of software development experience.</span>{" "}
                 I build cloud-native products, intelligent automations, and resilient systems across healthcare and business environments.
               </p>
             </div>
             <div className="mt-10 flex animate-fade-up flex-wrap gap-3 [animation-delay:240ms]">
-              <Button asChild><a href="#experience">Explore my work <ArrowDownRight size={16} /></a></Button>
+              <Button asChild><a href="#experience">My expertise <ArrowDownRight size={16} /></a></Button>
               <Button asChild variant="outline"><a href="mailto:r.ouano@icloud.com"><Mail size={16} /> Email me</a></Button>
             </div>
           </div>
@@ -218,7 +218,6 @@ export default function App() {
                     Build · Review · Validate
                   </p>
                 </div>
-                <span className="font-mono text-[10px] text-muted-foreground">CEB · PH</span>
               </div>
 
               <div className="rounded-2xl bg-primary p-6 text-primary-foreground">
@@ -234,31 +233,16 @@ export default function App() {
                   <div className="flex items-start gap-3 border-t border-primary-foreground/25 pt-4">
                     <Code2 className="mt-0.5 shrink-0" size={17} />
                     <p className="text-xs leading-5 opacity-80">
-                      Claude Code accelerates implementation, debugging, and testing. Review, observability, and validation keep the work dependable.
+                      Accelerated development with modern tools. Rigorous code review, observability, and validation ensure quality and reliability.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 grid grid-cols-3 divide-x divide-border border-y border-border py-4 text-center">
-                {[
-                  ["01", "Build"],
-                  ["02", "Observe"],
-                  ["03", "Improve"],
-                ].map(([number, label]) => (
-                  <div className="px-2" key={label}>
-                    <div className="font-mono text-[10px] text-primary">{number}</div>
-                    <div className="mt-1 text-[11px] text-muted-foreground">{label}</div>
-                  </div>
-                ))}
-              </div>
-
               <div className="mt-5 flex flex-wrap gap-2">
-                {["Claude Code", "React", "Next.js", "Python", "Rust", "AWS"].map((tech) => (
+                {["React", "Next.js", "Python", "AWS"].map((tech) => (
                   <Badge
-                    className={tech === "Claude Code"
-                      ? "border-primary/40 bg-primary/10 normal-case tracking-normal text-primary"
-                      : "border-border bg-muted/60 normal-case tracking-normal"}
+                    className="border-border bg-muted/60 normal-case tracking-normal"
                     key={tech}
                   >
                     {tech}
@@ -269,7 +253,7 @@ export default function App() {
           </div>
         </section>
 
-        <section className="border-y border-border bg-muted/40">
+        {/* <section className="border-y border-border bg-muted/40">
           <div className="mx-auto grid max-w-7xl divide-y divide-border px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:px-10">
             {[
               ["03", "Production codebases secured"],
@@ -282,9 +266,9 @@ export default function App() {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
-        <section id="experience" className="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
+        <section id="experience" className="mx-auto max-w-7xl px-5 pt-16 pb-12 lg:px-10 lg:pt-24 lg:pb-16">
           <SectionLabel number="01">Experience</SectionLabel>
           <div className="space-y-5">
             {experiences.map((job, index) => (
@@ -388,7 +372,7 @@ export default function App() {
             <h2 className="mx-auto mt-5 max-w-4xl font-display text-[clamp(3rem,8vw,7rem)] font-extrabold leading-[.9] tracking-[-.06em]">Let’s make it<br /><span className="text-primary">work beautifully.</span></h2>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <Button asChild><a href="mailto:r.ouano@icloud.com"><Mail size={16} /> r.ouano@icloud.com</a></Button>
-              <Button asChild variant="outline"><a href="tel:+639062866676"><Phone size={16} /> +63 906 2866 676</a></Button>
+              <Button asChild variant="outline"><a href="tel:+639766500070"><Phone size={16} /> +63 976 6500 070</a></Button>
             </div>
           </div>
         </section>
@@ -397,7 +381,7 @@ export default function App() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-7 font-mono text-[10px] uppercase tracking-wider text-muted-foreground sm:flex-row sm:items-center sm:justify-between lg:px-10">
           <span>© {new Date().getFullYear()} Ralph Eduard Ouano</span>
-          <span>Designed & engineered in Cebu</span>
+          <span>CEB</span>
         </div>
       </footer>
     </div>
